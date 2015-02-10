@@ -1,4 +1,4 @@
-define(['lib/ckeditor/ckeditor',"utilities/ModuleManager"],
+define(["lib/ckeditor/ckeditor","utilities/ModuleManager"],
     function(ckeditor,moduleManager) {
         function Html(data, editable) {
             this.render = function(element) {
@@ -13,18 +13,18 @@ define(['lib/ckeditor/ckeditor',"utilities/ModuleManager"],
                     var toolbar = {"toolbar":[toolBarItems]};
                     var editor = window.CKEDITOR.inline(div,toolbar);
                     $(div).attr("contenteditable","true");
-                    editor.on("instanceReady", function() { 
+                    editor.on("instanceReady", function() {
                         editor.setReadOnly(false);
                     });
                     moduleManager.setSaveFunction(div,function() {
-                        return {"Html":editor.getData()};
+                        return {"omnyClass":"Omny.Html","data":{"Html":editor.getData()}};
                     });
                 }
-                
+
                 element.appendChild(div);
-            };  
+            };
         }
-        
+
         return Html;
     }
 );

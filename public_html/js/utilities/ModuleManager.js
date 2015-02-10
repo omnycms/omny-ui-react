@@ -1,7 +1,7 @@
 define(["utilities/Guid"],
     function(Guid) {
         var defaultModules = [
-            {"name":"HTML", "module" :"Omny.Html"},
+            {"name":"Text", "module" :"Omny.Html"},
             {"name":"Menu", "module" :"Omny.Menu"},
             {"name":"Photo", "module" :"Omny.Photo"},
             {"name":"Youtube", "module" :"Omny.Youtube"}

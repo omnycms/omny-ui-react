@@ -1,7 +1,6 @@
 define(['react',"jsx!modules/ModuleRenderer/ModuleRenderer"],
     function(React) {
         window.OmnyModuleCollectionRenderer = React.createClass({
-          
           render: function() {
             console.log(this.props.modules);
             var editable = this.props.editable;
