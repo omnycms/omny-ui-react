@@ -5,7 +5,7 @@ define(['react',"jsx!modules/ModuleRenderer/ModuleRenderer"],
             console.log(this.props.modules);
             var editable = this.props.editable;
             var dropLocation;
-            if(editable=="true") {
+            if(editable) {
                 dropLocation=<div className="omny-drop-location" style={{display:"none"}}>Drop stuff here</div>
             }
             return <div>

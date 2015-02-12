@@ -27,7 +27,7 @@ define(['react',"utilities/ThemeLoader","jsx!modules/ModuleCollectionRenderer/Mo
         });
         function PageRenderer(pageName,pageData) {
             this.render = function(element) {
-                React.render(<OmnyPageRenderer editable="false" pagename={pageName} pagedata={pageData} />, element);
+                React.render(<OmnyPageRenderer editable={false} pagename={pageName} pagedata={pageData} />, element);
             }
         }
         return PageRenderer;

@@ -4,7 +4,7 @@ define(['react'],
           componentDidMount: function(){
             var node = this.getDOMNode();
             var moduleInstance = $(this.getDOMNode()).find(".omny-module-instance")[0];
-            
+
             var moduleData = this.props.module.data;
             var moduleName = this.props.module.omnyClass;
             if(moduleName.indexOf("Omny.")==0) {
@@ -15,8 +15,12 @@ define(['react'],
             });
             console.log(this.props.editable);
             var editable = this.props.editable=="true";
-            require(["jsx!modules/"+moduleName+"/"+moduleName],function(module) {
-                var instance = new module(moduleData, editable);
+            var moduleUrl = "modules/"+moduleName+"/"+moduleName
+            if(this.props.module.url) {
+              moduleUrl = this.props.module.url;
+            }
+            require(["jsx!"+moduleUrl],function(module) {
+                var instance = new module(moduleData, editable, moduleUrl);
                 instance.render(moduleInstance);
             });
           },

@@ -50,7 +50,7 @@ define(["react","jquery","jqueryui","utilities/ModuleManager","utilities/QuerySt
                         if (ui.item.hasClass("omny-draggable-module")) {
                             var x = document.createElement("div");
                             var mod = {"omnyClass":ui.item.attr("data-omny-module")};
-                            React.render(<OmnyModuleRenderer module={mod} editable="true" />,x);
+                            React.render(<OmnyModuleRenderer module={mod} editable={true} />,x);
                             ui.item.replaceWith(x.childNodes[0]);
                         }
                     }
