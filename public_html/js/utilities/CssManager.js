@@ -8,6 +8,10 @@ define(['jquery'],
                 link.setAttribute("href",url);
                 head.appendChild(link);
             };
+            CssManager.addCdnCss = function(relativeUrl) {
+              var url = omnyBaseUrl+relativeUrl;
+              CssManager.addCssFile(url);
+            };
 
             return CssManager;
         }

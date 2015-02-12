@@ -1,8 +1,8 @@
-define(["react","jquery","jqueryui","utilities/ModuleManager","utilities/QueryStringReader","utilities/PageLoader","jsx!modules/PageRenderer/PageRenderer"],
-    function(React,$,jqui,moduleManager,queryStringReader,pageLoader) {
+define(["react","jquery","jqueryui","utilities/ModuleManager","utilities/QueryStringReader","utilities/PageLoader","utilities/CssManager","jsx!modules/PageRenderer/PageRenderer"],
+    function(React,$,jqui,moduleManager,queryStringReader,pageLoader,cssManager) {
         var OmnyModuleList = React.createClass({
             componentDidMount: function(){
-                var node = this.getDOMNode(); 
+                var node = this.getDOMNode();
                 var pageNode = $(node).parent().parent().find(".omny-page");
                 var saveButton = $(node).find(".omny-save-button");
                 saveButton.click(function() {
@@ -10,10 +10,11 @@ define(["react","jquery","jqueryui","utilities/ModuleManager","utilities/QuerySt
                 });
                 $(node).find(".omny-draggable-module").draggable({
                     connectToSortable: ".omny-module-section .omny-module-section",
+                    appendTo: "body",
                     helper: 'clone',
                     revert: "invalid",
                     start: function() {
-                        //$(".omny-module-sidebar").hide();
+                        $(".omny-module-sidebar").hide();
                     },
                     stop: function(event, ui) {
                         $(".omny-module-sidebar").show();
@@ -70,6 +71,7 @@ define(["react","jquery","jqueryui","utilities/ModuleManager","utilities/QuerySt
                 React.render(<OmnyPageMaster />, element);
             }
         }
+        cssManager.addCdnCss("/js/modules/PageMaster/PageMaster.css")
         return PageMaster;
     }
 );
