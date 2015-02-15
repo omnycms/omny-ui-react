@@ -19,7 +19,8 @@ define(['react'],
             if(this.props.module.url) {
               moduleUrl = this.props.module.url;
             }
-            require(["jsx!"+moduleUrl],function(module) {
+            var requireUrl = "jsx!"+moduleUrl;
+            require([requireUrl],function(module) {
                 var instance = new module(moduleData, editable, moduleUrl);
                 instance.render(moduleInstance);
             });
@@ -28,7 +29,7 @@ define(['react'],
             console.log(this.props.module);
             var classes="omny-module";
             var dragHandle;
-            if(this.props.editable=="true") {
+            if(this.props.editable) {
                 classes+=" omny-editable-module";
                 dragHandle = <div>
                 <span className="omny-drag-handle glyphicon glyphicon-move">Handle</span>

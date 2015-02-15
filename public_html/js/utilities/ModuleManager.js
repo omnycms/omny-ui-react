@@ -12,14 +12,22 @@ define(["utilities/Guid"],
         ModuleManager.getDefaultModules = function() {
             return defaultModules;
         };
-        ModuleManager.setSaveFunction = function(element,func) {
+        ModuleManager.setSaveFunction = function(element,func,url) {
             var id = Guid.simpleguid();
             $(element).attr("data-omny-config-id",id);
             $(element).addClass("omny-editable-module-element");
-            moduleConfigurationFunctions[id] = func;
+            var configFunc = func;
+            if(url) {
+              configFunc = function() {
+                var partial = func();
+                partial.url = url;
+                return partial;
+              }
+            }
+            moduleConfigurationFunctions[id] = configFunc;
         };
         ModuleManager.getJson = function(rootElement) {
-            
+
             var results = {};
             $(rootElement).find(".omny-module-section").each(function() {
                 var section = $(this).attr("data-section");
@@ -36,6 +44,3 @@ define(["utilities/Guid"],
         return ModuleManager;
     }
 );
-
-
-
