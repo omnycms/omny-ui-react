@@ -10,7 +10,7 @@ function versioned(url) {
 }
 
 requirejs.config({
-    baseUrl: '/js',
+    baseUrl: omnyBaseUrl+'/js',
     urlArgs: "v="+version,
     waitSeconds: 20,
     jsx: {
