@@ -1,0 +1,13 @@
+language: java
+script:
+- ./bundle.sh $TRAVIS_BUILD_NUMBER
+deploy:
+  provider: s3
+  access_key_id: AKIAJPII7N6DVIOXPQAQ
+  secret_access_key:
+    secure: A7aW8U0J9oAn2ZqZkceMM2RxLfLA4ncRDRA36zY34/kUJBRT4hT8GuC68SZxILAwKLKxXmvCk6+6dX4IykHDq5OCEHnFK9F1kRZnxtmXIjCRUkckdzy6PP2AHXrIGGBo8DQw7/ygdwo9SJZq05yjvfCBcSt+6y0I9NKca+1yuMA=
+  bucket: omny-ui-react-releases
+  skip_cleanup: true
+  local-dir: output
+  on:
+    repo: omnycms/omny-ui-react
