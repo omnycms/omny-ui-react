@@ -7,7 +7,7 @@ define(['react',"utilities/ThemeLoader","jsx!modules/ModuleCollectionRenderer/Mo
             var pageModules = this.props.pagedata.pageModules;
             for(var section in this.props.pagedata.templateModules) {
                 var element = $(node).find("div[data-section="+section+"] div.omny-template-section")[0];
-                React.render(<OmnyModuleCollectionRenderer editable="false" modules={templateModules[section]} />, element);
+                React.render(<OmnyModuleCollectionRenderer editable={false} modules={templateModules[section]} />, element);
             }
             for(var section in this.props.pagedata.pageModules) {
                 var element = $(node).find("div[data-section="+section+"] div.omny-page-section")[0];
