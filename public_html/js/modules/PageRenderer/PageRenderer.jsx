@@ -6,11 +6,11 @@ define(['react',"utilities/ThemeLoader","jsx!modules/ModuleCollectionRenderer/Mo
             var templateModules = this.props.pagedata.templateModules;
             var pageModules = this.props.pagedata.pageModules;
             for(var section in this.props.pagedata.templateModules) {
-                var element = $(node).find("div[data-section="+section+"]")[0];
+                var element = $(node).find("div[data-section="+section+"] div.omny-template-section")[0];
                 React.render(<OmnyModuleCollectionRenderer editable="false" modules={templateModules[section]} />, element);
             }
             for(var section in this.props.pagedata.pageModules) {
-                var element = $(node).find("div[data-section="+section+"]")[0];
+                var element = $(node).find("div[data-section="+section+"] div.omny-page-section")[0];
                 React.render(<OmnyModuleCollectionRenderer editable={this.props.editable} modules={pageModules[section]} />, element);
             }
             themeLoader.loadTheme(this.props.pagedata.themeName,window.location.origin, function() {
@@ -18,16 +18,23 @@ define(['react',"utilities/ThemeLoader","jsx!modules/ModuleCollectionRenderer/Mo
           },
           render: function() {
             console.log(this.props.pagedata);
+            var siteName = this.props.siteDetails.siteName;
             var pageModules = this.props.pagedata.pageModules;
             var rawMarkup = this.props.pagedata.themeHtml.replace(/{{([a-zA-Z.]*)}}/g, function(m, key) {
-                return "<div class=\"omny-module-section\" data-omny-type=\"section\" data-section=\""+key+"\"></div>";
+                if(key=="site.siteName") {
+                    return siteName;
+                }
+                return "<div class=\"omny-module-section\" data-omny-type=\"section\" data-section=\""+key+"\">"
+                    +"<div class=\"omny-template-section\" ></div><div class=\"omny-page-section\" >"
+                    +"</div></div>";
             });
             return <div dangerouslySetInnerHTML={{__html: rawMarkup}} />;
           }
         });
-        function PageRenderer(pageName,pageData) {
+        function PageRenderer(pageName,pageData, siteDetails) {
             this.render = function(element) {
-                React.render(<OmnyPageRenderer editable={false} pagename={pageName} pagedata={pageData} />, element);
+                console.log(siteDetails);
+                React.render(<OmnyPageRenderer editable={false} pagename={pageName} siteDetails={siteDetails} pagedata={pageData} />, element);
             }
         }
         return PageRenderer;

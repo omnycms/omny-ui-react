@@ -61,8 +61,8 @@ define(["react","jquery","jqueryui","utilities/ModuleManager","utilities/QuerySt
             var node = this.getDOMNode();
             var pageName = queryStringReader.getParameter("page");
             var pageNode = $(node).find(".omny-page");
-            pageLoader.loadPage(pageName,function(pageData) {
-                React.render(<OmnyPageRenderer key="omny-page" editable="true" pagename={pageName} pagedata={pageData} />, pageNode[0]);
+            pageLoader.loadPage(pageName,function(pageData, siteDetails) {
+                React.render(<OmnyPageRenderer key="omny-page" editable="true" pagename={pageName} siteDetails={siteDetails} pagedata={pageData} />, pageNode[0]);
                 $(".omny-module-section .omny-module-section").sortable({
                     items: ".omny-editable-module",
                     placeholder: "ui-state-highlight",

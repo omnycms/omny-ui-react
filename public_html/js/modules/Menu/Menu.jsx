@@ -1,5 +1,5 @@
-define(["utilities/OmnyApiRequester","utilities/ModuleManager"],
-    function(apiRequester,moduleManager) {
+define(["utilities/OmnyApiRequester"],
+    function(apiRequester) {
       var OmnyMenu = React.createClass({
           getInitialState: function() {
             return {menuItems: []};
@@ -16,7 +16,7 @@ define(["utilities/OmnyApiRequester","utilities/ModuleManager"],
               return <ul>
                  {this.state.menuItems.map(function(menuItem, i){
                       return <li key={i}>
-                        <a href={menuItem.link}>menuItem.title</a>
+                        <a href={menuItem.link}>{menuItem.title}</a>
                         </li>;
                   })}
               </ul>;
