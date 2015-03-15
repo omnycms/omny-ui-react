@@ -34,5 +34,5 @@ requirejs.config({
     }
 });
 
-requirejs(['main']);
+requirejs(['jsx!main']);
 
