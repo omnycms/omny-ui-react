@@ -35,10 +35,5 @@ requirejs.config({
 });
 
 requirejs([
-    'jsx!main',
-    "jsx!modules/ModuleCollectionRenderer/ModuleCollectionRenderer",
-    "jsx!modules/ModuleRenderer/ModuleRenderer",
-    "jsx!modules/Html/Html",
-    "jsx!modules/Menu/Menu"
+    "jsx!main"
 ]);
-

@@ -8,9 +8,10 @@ define(['react',"jsx!modules/ModuleRenderer/ModuleRenderer"],
             if(editable) {
                 dropLocation=<div className="omny-drop-location" style={{display:"none"}}>Drop stuff here</div>
             }
+            var promises = this.props.promises;
             return <div>
             {this.props.modules.map(function(result,index) {
-                return <OmnyModuleRenderer editable={editable} key={index} module={result} />;
+                return <OmnyModuleRenderer promises={promises} editable={editable} key={index} module={result} />;
              })}
              {dropLocation}
             </div>;

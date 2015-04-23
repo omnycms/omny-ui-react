@@ -1,14 +1,15 @@
-define(["utilities/OmnyApiRequester"],
-    function(apiRequester) {
+define(["react","utilities/OmnyApiRequester"],
+    function(React,apiRequester) {
       var OmnyMenu = React.createClass({
           getInitialState: function() {
             return {menuItems: []};
           },
           componentDidMount: function(){
             var menu = this;
+            var fulfill = this.props.fulfill;
             apiRequester.apiRequest("menus","default/entries",{
               success:function(menuItems) {
-                menu.setState({menuItems: menuItems});
+                menu.setState({menuItems: menuItems},fulfill);
               }
             });
           },
@@ -25,7 +26,10 @@ define(["utilities/OmnyApiRequester"],
 
       function Menu(data) {
           this.render = function(element) {
-              React.render(<OmnyMenu />, element);
+            var promise = new Promise(function(fulfill,reject) {
+              React.render(<OmnyMenu fulfill={fulfill} />, element);
+            })
+            return promise;
           }
       }
       return Menu;

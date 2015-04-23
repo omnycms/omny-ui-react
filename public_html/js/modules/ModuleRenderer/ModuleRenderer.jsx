@@ -20,9 +20,16 @@ define(['react'],
               moduleUrl = this.props.module.url;
             }
             var requireUrl = "jsx!"+moduleUrl;
+            var promises = this.props.promises;
             require([requireUrl],function(module) {
                 var instance = new module(moduleData, editable, moduleUrl);
-                instance.render(moduleInstance);
+                var promise = instance.render(moduleInstance);
+                if(!promise) {
+                  promise = new Promise(function (fulfill, reject){
+                    fulfill();
+                  });
+                }
+                promises.push(promise);
             });
           },
           render: function(element,container) {

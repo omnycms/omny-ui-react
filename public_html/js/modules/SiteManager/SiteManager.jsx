@@ -1,14 +1,15 @@
-define(["utilities/OmnyApiRequester","utilities/ModuleManager"],
-    function(apiRequester,moduleManager) {
+define(["utilities/OmnyApiRequester","utilities/ModuleManager","react"],
+    function(apiRequester,moduleManager,React) {
       var OmnySiteManager = React.createClass({
           getInitialState: function() {
             return {sites: []};
           },
           componentDidMount: function(){
             var siteManager = this;
+            var fulfill = this.props.fulfill;
             apiRequester.apiRequest("sites","",{
               success:function(sites) {
-                siteManager.setState({sites: sites});
+                siteManager.setState({sites: sites},fulfill);
                 console.log(siteManager.getDOMNode());
               }
             });
@@ -24,7 +25,11 @@ define(["utilities/OmnyApiRequester","utilities/ModuleManager"],
 
       function SiteManager(data) {
           this.render = function(element) {
-              React.render(<OmnySiteManager />, element);
+            var promise = new Promise(function(fulfill,reject) {
+              React.render(<OmnySiteManager fulfill={fulfill} />, element);
+            })
+            return promise;
+
           }
       }
       return SiteManager;
