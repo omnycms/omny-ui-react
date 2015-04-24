@@ -9,6 +9,8 @@ function versioned(url) {
     return "/version/"+version+url;
 }
 
+var port = window.location.port?":"+window.location.port:"";
+
 requirejs.config({
     baseUrl: omnyBaseUrl+'/js',
     urlArgs: "v="+version,
@@ -29,7 +31,7 @@ requirejs.config({
         "jqueryui": 'lib/jquery-ui/js/jquery-ui',
         react: "lib/react/react",
         "JSXTransformer": "lib/require-plugins/JSXTransformer",
-        themes: 'themes',
+        themes: "//"+window.location.hostname+port+'/themes',
         ext: "https://modules.omny.ca"
     }
 });
