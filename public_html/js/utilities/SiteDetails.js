@@ -1,5 +1,5 @@
-define(["utilities/OmnyApiRequester"],
-    function(omnyApiRequester) {
+define(["utilities/OmnyApiRequester", "utilities/CookieManager", "utilities/QueryStringReader"],
+    function(omnyApiRequester, cookieManager, queryStringReader) {
         var SiteDetails = {};
         SiteDetails.siteCache = {};
         SiteDetails.getSiteDetails = function(hostname, callback) {
@@ -15,6 +15,18 @@ define(["utilities/OmnyApiRequester"],
                 });
             }
         };
+        SiteDetails.getCurrentSite = function() {
+            var site = cookieManager.getCookie("active_site");
+            if(!site) {
+                site = queryStringReader.getParameter("site");
+            }
+            return site;
+        };
+        
+        SiteDetails.setCurrentSite = function(site) {
+            cookieManager.setCookie("active_site",site,360);
+        };
+        
 
         return SiteDetails;
     }
