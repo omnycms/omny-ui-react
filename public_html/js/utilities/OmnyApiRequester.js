@@ -48,7 +48,7 @@ define(['jquery','utilities/AuthTokenManager','utilities/QueryStringReader',"uti
 
             ApiRequester.getHostname = function(ignoreSiteParameter) {
                 if (!ignoreSiteParameter&&typeof queryStringReader.getParameter("site") != "undefined") {
-                    return queryStringReader.getParameter("site");
+                    return siteDetails.getCurrentSite();
                 } else if (window.location.hostname.indexOf(".omny.me") > 0) {
                     return window.location.hostname.substring(0, window.location.hostname.indexOf(".omny.me"));
                 } else if (window.location.hostname.indexOf("local")==0) { 
