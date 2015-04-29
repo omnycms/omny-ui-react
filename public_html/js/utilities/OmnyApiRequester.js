@@ -47,7 +47,7 @@ define(['jquery','utilities/AuthTokenManager','utilities/QueryStringReader',"uti
             }
 
             ApiRequester.getHostname = function(ignoreSiteParameter) {
-                if (!ignoreSiteParameter&&typeof queryStringReader.getParameter("site") != "undefined") {
+                if (!ignoreSiteParameter && siteDetails.getCurrentSite()) {
                     return siteDetails.getCurrentSite();
                 } else if (window.location.hostname.indexOf(".omny.me") > 0) {
                     return window.location.hostname.substring(0, window.location.hostname.indexOf(".omny.me"));
@@ -62,7 +62,7 @@ define(['jquery','utilities/AuthTokenManager','utilities/QueryStringReader',"uti
             
             ApiRequester.getFullHostname = function(ignoreSiteParameter) {
                 var port = (window.location.port!=80&&window.location.port!=443)?":"+window.location.port:"";
-                if (!ignoreSiteParameter&&typeof queryStringReader.getParameter("site") != "undefined") {
+                if (!ignoreSiteParameter && siteDetails.getCurrentSite()) {
                     var site = siteDetails.getCurrentSite();
                     if(site.indexOf(".")<0) {
                         return site+".omny.me"+port;
