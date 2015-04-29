@@ -1,5 +1,5 @@
-define(['jquery','utilities/AuthTokenManager','utilities/QueryStringReader'],
-        function($, authTokenManager, queryStringReader) {
+define(['jquery','utilities/AuthTokenManager','utilities/QueryStringReader',"utilities/SiteDetails"],
+        function($, authTokenManager, queryStringReader,siteDetails) {
             var ApiRequester = {};
             ApiRequester.ajaxRequest = function(request) {
                 var requestInfo = {
@@ -63,7 +63,7 @@ define(['jquery','utilities/AuthTokenManager','utilities/QueryStringReader'],
             ApiRequester.getFullHostname = function(ignoreSiteParameter) {
                 var port = (window.location.port!=80&&window.location.port!=443)?":"+window.location.port:"";
                 if (!ignoreSiteParameter&&typeof queryStringReader.getParameter("site") != "undefined") {
-                    var site = queryStringReader.getParameter("site");
+                    var site = siteDetails.getCurrentSite();
                     if(site.indexOf(".")<0) {
                         return site+".omny.me"+port;
                     }
