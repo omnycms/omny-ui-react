@@ -89,6 +89,29 @@ define(['jquery','utilities/AuthTokenManager','utilities/QueryStringReader',"uti
                 request.url = url;
                 ApiRequester.ajaxRequest(request);
             }
+            
+            ApiRequester.apiRequestPromise = function(module, path, request, version) {
+                var promise = new Promise(function (fulfill, reject) {
+                    var url = window.location.origin+"/api/v1.0/" + module;
+                    if(path!="") {
+                        url +="/"+path;
+                    }
+                    if (url.indexOf("?") == -1) {
+                        url += "?access_token=" + authTokenManager.getToken();
+                    } else {
+                        url += "&access_token=" + authTokenManager.getToken();
+                    }
+                    request.url = url;
+                    request.success = function() {
+                        fulfill.apply(this, arguments);
+                    };
+                    request.error=function() {
+                        reject.apply(this, arguments);
+                    }
+                    ApiRequester.ajaxRequest(request);
+                });
+                return promise;
+            }
 
             return ApiRequester;
         }
