@@ -3,6 +3,9 @@ if(typeof console == "undefined") {
 }
 
 function versioned(url) {
+    if(!version) {
+        return url;   
+    }
     if(!url.indexOf("/")==0) {
         url = "/"+url;
     }
@@ -11,31 +14,24 @@ function versioned(url) {
 
 var port = window.location.port?":"+window.location.port:"";
 
-requirejs.config({
+var requireConfig = {
     baseUrl: omnyBaseUrl+'/js',
-    urlArgs: "v="+version,
+
     waitSeconds: 20,
-    jsx: {
-        fileExtension: '.jsx',
-        harmony: true
-    },
-    config: {
-        text: {
-            useXhr: function (url, protocol, hostname, port) {
-                return true;
-            }
-        }
-    },
     paths: {
         jquery: 'lib/jquery',
         "jqueryui": 'lib/jquery-ui/js/jquery-ui',
         react: "lib/react/react",
-        "JSXTransformer": "lib/require-plugins/JSXTransformer",
         themes: "//"+window.location.hostname+port+'/themes',
         ext: "https://modules.omny.ca"
     }
-});
+};
+if(typeof version!="undefined") {
+       requireConfig.urlArgs = "v="+version;
+}
+requirejs.config(requireConfig
+);
 
 requirejs([
-    "jsx!main"
+    "main"
 ]);
