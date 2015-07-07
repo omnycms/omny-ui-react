@@ -1,8 +1,9 @@
-require(["jquery","react","modules/ModuleCollectionRenderer/ModuleCollectionRenderer"],
+require(["jquery","react","modules/ModuleCollectionRenderer/ModuleCollectionRenderer",
+    "modules/Html/Html","modules/Login/Login","modules/Menu/Menu"],
 function($,React) {
     window.pageLoadPromises = [];
 
-    if(omnyTemplateModules) {
+    if(typeof omnyTemplateModules!="undefined") {
       for(var section in omnyTemplateModules) {
           if(omnyTemplateModules[section].length>0) {
               var element = $("div[data-section="+section+"] div.omny-template-section")[0];
@@ -10,7 +11,7 @@ function($,React) {
           }
       }
     }
-    if(omnyPageModules) {
+    if(typeof omnyPageModules!="undefined") {
       for(var section in omnyPageModules) {
           if(omnyPageModules[section].length>0) {
               var element = $("div[data-section="+section+"] div.omny-page-section")[0];
