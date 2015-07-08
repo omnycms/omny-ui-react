@@ -31,9 +31,10 @@ if(typeof version!="undefined") {
 }
 requirejs.config(requireConfig
 );
-
-requirejs([
-    "main"
-],function(main) {
-    main.load();
+$(function() {
+    requirejs([
+        "omnyApp"
+    ],function(main) {
+        main.load();
+    });
 });
