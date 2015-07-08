@@ -34,4 +34,6 @@ requirejs.config(requireConfig
 
 requirejs([
     "main"
-]);
+],function(main) {
+    main.load();
+});
