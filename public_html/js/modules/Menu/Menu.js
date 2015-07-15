@@ -7,11 +7,15 @@ define(["react","utilities/OmnyApiRequester"],
           componentDidMount: function(){
             var menu = this;
             var fulfill = this.props.fulfill;
-            apiRequester.apiRequest("menus","default/entries",{
-              success:function(menuItems) {
-                menu.setState({menuItems: menuItems},fulfill);
-              }
-            });
+            if(typeof this.props.data !="undefined" && typeof this.props.data.menuItems !="undefined") {
+              menu.setState({menuItems: this.props.data.menuItems},fulfill);
+            } else {
+              apiRequester.apiRequest("menus","default/entries",{
+                success:function(menuItems) {
+                  menu.setState({menuItems: menuItems},fulfill);
+                }
+              });
+            }
           },
           render: function() {
               return React.createElement("ul", null, 
@@ -27,7 +31,7 @@ define(["react","utilities/OmnyApiRequester"],
       function Menu(data) {
           this.render = function(element) {
             var promise = new Promise(function(fulfill,reject) {
-              React.render(React.createElement(OmnyMenu, {fulfill: fulfill}), element);
+              React.render(React.createElement(OmnyMenu, {data: data, fulfill: fulfill}), element);
             })
             return promise;
           }

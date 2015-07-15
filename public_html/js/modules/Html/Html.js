@@ -1,5 +1,5 @@
-define(["lib/ckeditor/ckeditor","utilities/ModuleManager"],
-    function(ckeditor,moduleManager) {
+define(["utilities/ModuleManager"],
+    function(moduleManager) {
         function Html(data, editable) {
             this.render = function(element) {
                 var div = document.createElement("div");
@@ -8,16 +8,18 @@ define(["lib/ckeditor/ckeditor","utilities/ModuleManager"],
                 }
                 div.innerHTML=data.Html;
                 if(editable) {
-                    window.CKEDITOR.disableAutoInline = true;
-                    var toolBarItems = ["Bold","Italic","Underline","Undo","Redo","Sourcedialog"];
-                    var toolbar = {"toolbar":[toolBarItems]};
-                    var editor = window.CKEDITOR.inline(div,toolbar);
-                    $(div).attr("contenteditable","true");
-                    editor.on("instanceReady", function() {
-                        editor.setReadOnly(false);
-                    });
-                    moduleManager.setSaveFunction(div,function() {
-                        return {"omnyClass":"Omny.Html","data":{"Html":editor.getData()}};
+                    require(["lib/ckeditor/ckeditor"], function(ckeditor) {
+                        window.CKEDITOR.disableAutoInline = true;
+                        var toolBarItems = ["Bold","Italic","Underline","Undo","Redo","Sourcedialog"];
+                        var toolbar = {"toolbar":[toolBarItems]};
+                        var editor = window.CKEDITOR.inline(div,toolbar);
+                        $(div).attr("contenteditable","true");
+                        editor.on("instanceReady", function() {
+                            editor.setReadOnly(false);
+                        });
+                        moduleManager.setSaveFunction(div,function() {
+                            return {"omnyClass":"Omny.Html","data":{"Html":editor.getData()}};
+                        });
                     });
                 }
 
