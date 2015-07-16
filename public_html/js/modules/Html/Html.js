@@ -2,6 +2,10 @@ define(["utilities/ModuleManager"],
     function(moduleManager) {
         function Html(data, editable) {
             this.render = function(element) {
+                //don't run if we've preprocessed the module
+                if(element.hasChildNodes()) {
+                    return;
+                }
                 var div = document.createElement("div");
                 if(!data) {
                     data = {"omnyClass":"Omny.Html","Html":"Sample text"};
@@ -25,6 +29,12 @@ define(["utilities/ModuleManager"],
 
                 element.appendChild(div);
             };
+            this.renderToString = function() {
+                var promise = new Promise(function(fulfill,reject) {
+                  fulfill(data.html);
+                })
+                return promise;
+            }
         }
 
         return Html;

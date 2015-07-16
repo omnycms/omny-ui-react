@@ -50,6 +50,12 @@ define(['react'],
             this.render = function(element) {
                 React.render(<OmnyModuleRenderer module={module} />, element)
             }
+            this.renderToString = function() {
+                var promise = new Promise(function(fulfill,reject) {
+                    React.renderToString(<OmnyModuleRenderer module={module} />)
+                })
+                return promise;
+            }
         }
         return ModuleRenderer;
     }

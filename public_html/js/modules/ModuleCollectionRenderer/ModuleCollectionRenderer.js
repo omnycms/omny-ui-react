@@ -21,6 +21,12 @@ define(['react',"modules/ModuleRenderer/ModuleRenderer"],
             this.render = function(element) {
                 React.render(React.createElement(OmnyModuleCollectionRenderer, {editable: "false", modules: modules}), element)
             }
+            this.renderToString = function() {
+                var promise = new Promise(function(fulfill,reject) {
+                  React.renderToString(React.createElement(OmnyModuleCollectionRenderer, {editable: "false", modules: modules}))
+                })
+                return promise;
+            }
         }
         return ModuleCollectionRenderer;
     }
