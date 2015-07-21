@@ -66,7 +66,7 @@ define(['react'],
                     if(typeof window.moduleCache[moduleName] != "undefined") {
                         var instance = new window.moduleCache[moduleName](this.props.module.data,false, this.getModuleUrl(moduleName));
                         if(typeof instance.renderToString !="undefined") {
-                            return <div dangerouslySetInnerHTML={{__html: instance.renderToString()}} />
+                            return <div className={classes}>{dragHandle}<div dangerouslySetInnerHTML={{__html: instance.renderToString()}} className="omny-module-instance" /></div>
                         }
                     }
                 }
