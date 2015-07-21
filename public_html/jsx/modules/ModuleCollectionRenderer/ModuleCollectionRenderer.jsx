@@ -9,9 +9,11 @@ define(['react',"modules/ModuleRenderer/ModuleRenderer"],
                 dropLocation=<div className="omny-drop-location" style={{display:"none"}}>Drop stuff here</div>
             }
             var promises = this.props.promises;
+            console.log("load immediately "+this.props.loadImmediately);
+            var loadImmediately = this.props.loadImmediately;
             return <div>
             {this.props.modules.map(function(result,index) {
-                return <OmnyModuleRenderer promises={promises} editable={editable} key={index} module={result} />;
+                return <OmnyModuleRenderer promises={promises} loadImmediately={loadImmediately} editable={editable} key={index} module={result} />;
              })}
              {dropLocation}
             </div>;
@@ -22,10 +24,7 @@ define(['react',"modules/ModuleRenderer/ModuleRenderer"],
                 React.render(<OmnyModuleCollectionRenderer editable="false" modules={modules} />, element)
             }
             this.renderToString = function() {
-                var promise = new Promise(function(fulfill,reject) {
-                  React.renderToString(<OmnyModuleCollectionRenderer editable="false" modules={modules} />)
-                })
-                return promise;
+              return React.renderToString(<OmnyModuleCollectionRenderer editable="false" modules={modules} />)
             }
         }
         return ModuleCollectionRenderer;

@@ -30,10 +30,7 @@ define(["utilities/ModuleManager"],
                 element.appendChild(div);
             };
             this.renderToString = function() {
-                var promise = new Promise(function(fulfill,reject) {
-                  fulfill(data.html);
-                })
-                return promise;
+                return "<div>"+data.Html+"</div>";
             }
         }
 
