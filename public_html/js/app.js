@@ -23,7 +23,7 @@ var requireConfig = {
     paths: {
         jquery: 'lib/jquery',
         "jqueryui": 'lib/jquery-ui/js/jquery-ui',
-        "bootstrap": 'lib/bootstrap/bootstrap.min.js',
+        "bootstrap": 'lib/bootstrap/js/bootstrap.min',
         react: "lib/react/react",
         themes: "//"+window.location.hostname+port+'/themes',
         ext: "https://modules.omny.ca"

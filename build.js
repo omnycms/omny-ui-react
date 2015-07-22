@@ -14,6 +14,7 @@
     },
     paths: {
         jquery: 'lib/jquery',
+        "bootstrap": 'lib/bootstrap/js/bootstrap.min',
         "jqueryui": 'lib/jquery-ui/js/jquery-ui',
         react: "lib/react/react",
         "JSXTransformer": "lib/require-plugins/JSXTransformer",
