@@ -8,7 +8,7 @@ define(['react'],
 
             var moduleData = this.props.module.data;
             var moduleName = this.props.module.omnyClass;
-            this.getModuleUrl(moduleName);
+            var requireUrl = this.getModuleUrl(moduleName);
             
             $(node).find(".omny-delete-module").click(function() {
                 $(node).remove();
@@ -19,9 +19,8 @@ define(['react'],
             var promises = this.props.promises;
             
             console.log(this.props.editable);
-            
             require([requireUrl],function(module) {
-                var instance = new module(moduleData, editable, moduleUrl);
+                var instance = new module(moduleData, editable, requireUrl);
                 var promise = instance.render(moduleInstance);
                 if(!promise) {
                   promise = new Promise(function (fulfill, reject){
