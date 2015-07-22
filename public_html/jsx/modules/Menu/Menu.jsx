@@ -38,8 +38,8 @@ define(["react","utilities/OmnyApiRequester"],
             })
             return promise;
           }
-          this.renderToString = function() {
-              return React.renderToString(<OmnyMenu data={data} />);
+          this.renderToStaticString = function() {
+              return React.renderToStaticString(<OmnyMenu data={data} />);
           }
       }
       return Menu;

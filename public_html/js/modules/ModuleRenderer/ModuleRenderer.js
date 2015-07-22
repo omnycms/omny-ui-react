@@ -1,8 +1,21 @@
 define(['react'],
     function(React) {
         window.OmnyModuleRenderer = React.createClass({displayName: "OmnyModuleRenderer",
-        
+          getInitialState: function() {
+              var instance = null;
+              if(typeof window.moduleCache !="undefined") {
+                var moduleName = this.getModuleName();
+                if(typeof window.moduleCache[moduleName] != "undefined") {
+                    instance = new window.moduleCache[moduleName](this.props.module.data,false, this.getModuleUrl(moduleName));
+                }
+              }
+              return {moduleInstance: instance};
+          },
           componentDidMount: function(){
+            var editable = this.props.editable=="true";
+            if(!editable &&typeof this.state.moduleInstance !="undefined" && typeof this.state.moduleInstance.renderToStaticString !="undefined") {
+                return;
+            }
             var node = this.getDOMNode();
             var moduleInstance = $(this.getDOMNode()).find(".omny-module-instance")[0];
 
@@ -14,11 +27,10 @@ define(['react'],
                 $(node).remove();
             });
             
-            var editable = this.props.editable=="true";
-            
             var promises = this.props.promises;
             
             console.log(this.props.editable);
+            
             require([requireUrl],function(module) {
                 var instance = new module(moduleData, editable, requireUrl);
                 var promise = instance.render(moduleInstance);
@@ -59,15 +71,12 @@ define(['react'],
                 React.createElement("span", {className: "omny-delete-module"}, "Delete")
                 );
             }
-            if(typeof window.moduleCache !="undefined") {
-                var moduleName = this.getModuleName();
-                if(typeof window.moduleCache[moduleName] != "undefined") {
-                    var instance = new window.moduleCache[moduleName](this.props.module.data,false, this.getModuleUrl(moduleName));
-                    if(typeof instance.renderToString !="undefined") {
-                        return React.createElement("div", {className: classes}, dragHandle, React.createElement("div", {dangerouslySetInnerHTML: {__html: instance.renderToString()}, className: "omny-module-instance"}))
-                    }
-                }
+            var editable = this.props.editable=="true";
+            if(!editable &&typeof this.state.moduleInstance !="undefined" && typeof this.state.moduleInstance.renderToStaticString !="undefined") {
+                var instance = this.state.moduleInstance;
+                return React.createElement("div", {className: classes}, dragHandle, React.createElement("div", {dangerouslySetInnerHTML: {__html: instance.renderToString()}, className: "omny-module-instance"}))
             }
+            
             return React.createElement("div", {className: classes}, dragHandle, React.createElement("div", {className: "omny-module-instance"}));
           }
         });

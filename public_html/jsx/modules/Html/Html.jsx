@@ -29,7 +29,7 @@ define(["utilities/ModuleManager"],
 
                 element.appendChild(div);
             };
-            this.renderToString = function() {
+            this.renderToStaticString = function() {
                 return "<div>"+data.Html+"</div>";
             }
         }
