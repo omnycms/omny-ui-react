@@ -60,14 +60,12 @@ define(['react'],
                 <span className="omny-delete-module">Delete</span>
                 </div>;
             }
-            if(this.props.loadImmediately) {
-                if(typeof window.moduleCache !="undefined") {
-                    var moduleName = this.getModuleName();
-                    if(typeof window.moduleCache[moduleName] != "undefined") {
-                        var instance = new window.moduleCache[moduleName](this.props.module.data,false, this.getModuleUrl(moduleName));
-                        if(typeof instance.renderToString !="undefined") {
-                            return <div className={classes}>{dragHandle}<div dangerouslySetInnerHTML={{__html: instance.renderToString()}} className="omny-module-instance" /></div>
-                        }
+            if(typeof window.moduleCache !="undefined") {
+                var moduleName = this.getModuleName();
+                if(typeof window.moduleCache[moduleName] != "undefined") {
+                    var instance = new window.moduleCache[moduleName](this.props.module.data,false, this.getModuleUrl(moduleName));
+                    if(typeof instance.renderToString !="undefined") {
+                        return <div className={classes}>{dragHandle}<div dangerouslySetInnerHTML={{__html: instance.renderToString()}} className="omny-module-instance" /></div>
                     }
                 }
             }
