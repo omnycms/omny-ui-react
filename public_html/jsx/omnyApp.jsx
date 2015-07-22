@@ -1,4 +1,4 @@
-define(["jquery","react","modules/ModuleCollectionRenderer/ModuleCollectionRenderer",
+define(["jquery","react","bootstrap","modules/ModuleCollectionRenderer/ModuleCollectionRenderer",
     "modules/Html/Html","modules/Login/Login","modules/Menu/Menu"],
 function($,React) {
   return {
