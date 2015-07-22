@@ -13,7 +13,7 @@ define(['react'],
           },
           componentDidMount: function(){
             var editable = this.props.editable=="true";
-            if(!editable &&typeof this.state.moduleInstance !="undefined" && typeof this.state.moduleInstance.renderToStaticString !="undefined") {
+            if(!editable &&typeof this.state.moduleInstance !="undefined"  && this.state.moduleInstance!=null && typeof this.state.moduleInstance.renderToStaticString !="undefined") {
                 return;
             }
             var node = this.getDOMNode();
