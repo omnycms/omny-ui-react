@@ -1,6 +1,7 @@
 define(["jquery","react","bootstrap","modules/ModuleCollectionRenderer/ModuleCollectionRenderer",
     "modules/Html/Html","modules/Login/Login","modules/Menu/Menu"],
-function($,React) {
+function($,React,bootstrap,mcr,html,login,menu) {
+  window.moduleCache= {"Html": html, "Menu": menu};
   return {
     load: function() {window.pageLoadPromises = [];
       if(typeof omnyTemplateModules!="undefined") {

@@ -59,14 +59,12 @@ define(['react'],
                 React.createElement("span", {className: "omny-delete-module"}, "Delete")
                 );
             }
-            if(this.props.loadImmediately) {
-                if(typeof window.moduleCache !="undefined") {
-                    var moduleName = this.getModuleName();
-                    if(typeof window.moduleCache[moduleName] != "undefined") {
-                        var instance = new window.moduleCache[moduleName](this.props.module.data,false, this.getModuleUrl(moduleName));
-                        if(typeof instance.renderToString !="undefined") {
-                            return React.createElement("div", {className: classes}, dragHandle, React.createElement("div", {dangerouslySetInnerHTML: {__html: instance.renderToString()}, className: "omny-module-instance"}))
-                        }
+            if(typeof window.moduleCache !="undefined") {
+                var moduleName = this.getModuleName();
+                if(typeof window.moduleCache[moduleName] != "undefined") {
+                    var instance = new window.moduleCache[moduleName](this.props.module.data,false, this.getModuleUrl(moduleName));
+                    if(typeof instance.renderToString !="undefined") {
+                        return React.createElement("div", {className: classes}, dragHandle, React.createElement("div", {dangerouslySetInnerHTML: {__html: instance.renderToString()}, className: "omny-module-instance"}))
                     }
                 }
             }
