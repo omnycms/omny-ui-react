@@ -74,7 +74,7 @@ define(['react'],
             var editable = this.props.editable=="true";
             if(!editable &&typeof this.state.moduleInstance !="undefined" && typeof this.state.moduleInstance.renderToStaticString !="undefined") {
                 var instance = this.state.moduleInstance;
-                return <div className={classes}>{dragHandle}<div dangerouslySetInnerHTML={{__html: instance.renderToString()}} className="omny-module-instance" /></div>
+                return <div className={classes}>{dragHandle}<div dangerouslySetInnerHTML={{__html: instance.renderToStaticString()}} className="omny-module-instance" /></div>
             }
             
             return <div className={classes}>{dragHandle}<div className="omny-module-instance" /></div>;
